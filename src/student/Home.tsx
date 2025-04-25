@@ -61,70 +61,98 @@ const itemVariants = {
     visible: { y: 0, opacity: 1 },
 };
 
-const StudentIdCard = ({ user }: { user: any }) => (
-  <div id="student-id-card" className="w-[400px] h-[250px] bg-white rounded-xl overflow-hidden shadow-2xl">
-    {/* Header */}
-    <div className="h-16 bg-[#DC2626] flex items-center justify-between px-4">
-      <div className="flex items-center gap-2">
-        <FaUniversity className="h-8 w-8 text-white" />
-        <div className="text-white">
-          <h3 className="font-bold text-lg">University Name</h3>
-          <p className="text-xs opacity-80">Student Identification Card</p>
+const StudentIdCard = ({ user, avatarSrc }: { user: any; avatarSrc: string }) => (
+  <div id="student-id-card" className="w-[650px] h-[420px] bg-white p-6 shadow-2xl rounded-2xl relative overflow-hidden">
+    {/* Decorative Background Circles */}
+    <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+    <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full translate-y-1/2 -translate-x-1/2" />
+    <div className="absolute top-1/2 right-10 w-24 h-24 bg-white/5 rounded-full" />
+
+    {/* Content Container */}
+    <div className="relative flex flex-col h-full justify-between">
+      {/* Header */}
+      <div className="text-center text-[#DC2626]">
+        <h3 className="font-bold text-4xl tracking-wide">MET Bhujbal Knowledge City</h3>
+      </div>
+
+      {/* ID Card Body */}
+      <div className="flex flex-1 gap-8 mt-6 bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+        {/* Avatar */}
+        <div className="flex flex-col items-center justify-between w-[200px]">
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#C4302B] to-[#991B1B] rounded-full -rotate-45 opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="relative w-40 h-40 rounded-full border-4 border-white overflow-hidden shadow-xl">
+              <img src={avatarSrc} alt="Student" className="w-full h-full object-cover" />
+            </div>
+          </div>
+          <div className="mt-4 bg-gradient-to-r from-[#C4302B]/10 to-[#991B1B]/10 px-8 py-2 rounded-full border border-[#C4302B]/20">
+            <p className="text-base font-semibold text-[#991B1B] tracking-wide">{new Date().getFullYear()} - {new Date().getFullYear()+1}</p>
+          </div>
+        </div>
+
+        {/* Details */}
+        <div className="flex-1 flex flex-col justify-between">
+          <div>
+            <h2 className="text-3xl font-bold text-[#991B1B] tracking-wider border-b-2 border-[#C4302B]/20 pb-3 mb-6">
+              STUDENT ID CARD
+            </h2>
+            <div className="space-y-6">
+              {[
+                { label: 'Name', value: user?.name },
+                { label: 'ID Number', value: user?.id },
+                { label: 'Department', value: user?.department },
+              ].map((item, idx) => (
+                <div key={idx} className="hover:bg-[#C4302B]/5 p-3 rounded-lg transition-all duration-200">
+                  <p className="text-base text-gray-500 mb-2">{item.label}</p>
+                  <p className="text-xl font-semibold text-gray-800">{item.value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Barcode Section */}
+          <div className="self-center">
+            <div className="bg-gradient-to-r from-[#1B2024] to-[#2C3E50] text-white py-4 px-10 rounded-lg shadow-lg flex items-center justify-center gap-3 text-lg">
+              <div className="w-1 h-6 bg-white/30 rounded-full" />
+              <p className="font-semibold tracking-wide">BARCODE</p>
+              <div className="w-1 h-6 bg-white/30 rounded-full" />
+            </div>
+          </div>
         </div>
       </div>
-      <div className="bg-white/20 px-3 py-1 rounded-full">
-        <p className="text-white text-sm font-medium">2023-24</p>
+
+      {/* Footer */}
+      <div className="flex items-center justify-between mt-6 px-4 py-2 bg-gray-50 text-gray-700 text-sm font-medium tracking-wide rounded-md">
+        <div className="flex items-center gap-2">
+          <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse" />
+          <p>Valid until: 31/12/{new Date().getFullYear()+1}</p>
+        </div>
+        <div className="bg-gray-100 px-4 py-1.5 rounded-full">
+          <p className="tracking-wide">STUDENT</p>
+        </div>
       </div>
     </div>
-
-    {/* Content */}
-    <div className="p-4 flex gap-4">
-      <div className="w-[100px] h-[120px] bg-white rounded-lg overflow-hidden shadow-md border border-gray-100">
-        <img
-          src="/placeholder-avatar.jpg"
-          alt="Student"
-          className="w-full h-full object-cover"
-        />
-      </div>
-      
-      <div className="flex-1 space-y-2">
-        <div>
-          <p className="text-sm text-gray-500">GR Number</p>
-          <p className="font-semibold">{user?.id || 'N04112100064'}</p>
-        </div>
-        <div>
-          <p className="text-sm text-gray-500">Name</p>
-          <p className="font-semibold">{user?.name || 'Lachake Atharva Santosh'}</p>
-        </div>
-        <div>
-          <p className="text-sm text-gray-500">Department</p>
-          <p className="font-semibold">{user?.department || 'Computer Science'}</p>
-        </div>
-        <div>
-          <p className="text-sm text-gray-500">Year</p>
-          <p className="font-semibold">{user?.year || 'Fourth'}</p>
-        </div>
-      </div>
-
-      <div className="w-[80px] flex flex-col items-center justify-between">
-        <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center shadow-md border border-gray-100">
-          <FaBarcode className="h-16 w-16 text-[#DC2626]" />
-        </div>
-        <div className="text-center bg-gray-50 px-3 py-2 rounded-full border border-gray-100">
-          <p className="text-[10px] text-gray-500">Valid Till</p>
-          <p className="text-xs font-medium">31/12/2024</p>
-        </div>
-      </div>
-    </div>
-
-    {/* Footer */}
-    <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#DC2626]" />
   </div>
 );
 
 const StudentHome = () => {
     const { user } = useAuth();
     const [selectedTimeRange, setSelectedTimeRange] = useState('week');
+    const initialAvatar = typeof window !== 'undefined' ? localStorage.getItem('studentAvatarSrc') : null;
+    const [avatarSrc, setAvatarSrc] = useState<string>(initialAvatar || '/placeholder-avatar.jpg');
+    const handleAvatarChange = (e: any) => {
+      if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (reader.result) {
+            const src = reader.result as string;
+            setAvatarSrc(src);
+            localStorage.setItem('studentAvatarSrc', src);
+          }
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    };
     const [academicStats, setAcademicStats] = useState({
         totalCredits: 102,
         completedCredits: 75,
@@ -139,20 +167,81 @@ const StudentHome = () => {
     const [selectedSemester, setSelectedSemester] = useState(4);
     const [showAcademicCalendar, setShowAcademicCalendar] = useState(false);
 
-    const handleDownloadId = async () => {
-        const idCard = document.getElementById('student-id-card');
-        if (idCard) {
-            try {
-                const canvas = await html2canvas(idCard);
-                const image = canvas.toDataURL('image/png');
-                const link = document.createElement('a');
-                link.href = image;
-                link.download = 'student-id-card.png';
-                link.click();
-            } catch (error) {
-                console.error('Error generating ID card:', error);
-            }
-        }
+    const handleDownloadId = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      canvas.width = 850;
+      canvas.height = 540;
+
+      // White background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Header bar
+      ctx.fillStyle = '#C4302B';
+      ctx.fillRect(0, 0, canvas.width, 80);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 42px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('MET Bhujbal Knowledge City', canvas.width/2, 50);
+
+      // ID card title
+      ctx.fillStyle = '#';
+      ctx.font = 'bold 30px Arial';
+      ctx.textAlign = 'left';
+      ctx.fillText('STUDENT ID CARD', 270, 130);
+
+      // Draw avatar circle
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = avatarSrc;
+      img.onload = () => {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(150, 270, 80, 0, Math.PI*2);
+        ctx.clip();
+        ctx.drawImage(img, 70, 190, 160, 160);
+        ctx.restore();
+
+        // Student details
+        ctx.fillStyle = '#64748b';
+        ctx.font = '16px Arial';
+        ['Name:', 'ID:', 'Department:'].forEach((label, i) => {
+          ctx.fillText(label, 270, 200 + i*40);
+          ctx.fillStyle = '#1a202c';
+          ctx.font = 'bold 18px Arial';
+          const val = i===0 ? user?.name : i===1 ? user?.id : user?.department;
+          ctx.fillText(val||'', 350, 200 + i*40);
+          ctx.fillStyle = '#64748b';
+          ctx.font = '16px Arial';
+        });
+
+        // Barcode placeholder
+        ctx.fillStyle = '#2C3E50';
+        ctx.fillRect((canvas.width-350)/2, 330, 350, 50);
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 20px Arial';
+        ctx.fillText('BARCODE', canvas.width/2, 365);
+
+        // Footer
+        ctx.fillStyle = '#C4302B';
+        ctx.fillRect(0, canvas.height-60, canvas.width, 60);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '18px Arial';
+        ctx.textAlign = 'left';
+        ctx.fillText('Valid until: 31/12/2025', 20, canvas.height-20);
+        ctx.textAlign = 'right';
+        ctx.fillText('STUDENT', canvas.width-20, canvas.height-20);
+
+        // Download the card
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'student_id_card.png';
+        link.click();
+      };
     };
 
     return (
@@ -170,48 +259,34 @@ const StudentHome = () => {
                 <div className="bg-[#DC2626] text-white p-6">
                     <div className="flex justify-between items-start">
                         <div className="flex gap-6">
-                            <Avatar className="h-24 w-24 border-4 border-white/20">
-                                <AvatarImage src="/placeholder-avatar.jpg" alt="Student" />
-                                <AvatarFallback className="bg-white text-[#DC2626] text-xl">
-                                    {user?.name?.split(' ').map(n => n[0]).join('') || 'LS'}
-                                </AvatarFallback>
-                            </Avatar>
+                            <div className="relative inline-block">
+                                <Avatar className="h-24 w-24 border-4 border-white/20">
+                                    <AvatarImage src={avatarSrc} alt="Student" />
+                                    <AvatarFallback className="bg-white text-[#DC2626] text-xl">
+                                        {user?.name?.split(' ').map(n => n[0]).join('') || 'LS'}
+                                    </AvatarFallback>
+                                </Avatar>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer rounded-full"
+                                    onChange={handleAvatarChange}
+                                />
+                            </div>
                             <div className="space-y-1">
-                                <h2 className="text-2xl font-bold">{user?.name || 'Lachake Atharva Santosh'}</h2>
+                                <h2 className="text-2xl font-bold">{user?.name }</h2>
                                 <div className="flex gap-2">
-                                    <Badge className="bg-white/20 hover:bg-white/30">{user?.year || 'Fourth'} Year</Badge>
+                                    <Badge className="bg-white/20 hover:bg-white/30">{ '2025'} Year</Badge>
                                     <Badge className="bg-white/20 hover:bg-white/30">{user?.department || 'Computer Science'}</Badge>
                                 </div>
                                 <p className="text-sm text-white/80">GR Number: {user?.id || 'N04112100064'}</p>
                             </div>
                         </div>
                         <div className="flex gap-3">
-                            <Dialog>
-                                <DialogTrigger asChild>
-                                    <Button variant="secondary" className="bg-white text-[#DC2626] hover:bg-gray-100">
-                                        <FaIdCard className="mr-2" />
-                                        Download ID Card
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent className="max-w-[450px]">
-                                    <DialogHeader>
-                                        <DialogTitle>Student ID Card</DialogTitle>
-                                    </DialogHeader>
-                                    <div className="py-4">
-                                        <StudentIdCard user={user} />
-                                    </div>
-                                    <DialogFooter className="flex gap-2">
-                                        <Button variant="outline" onClick={() => window.print()}>
-                                            <Printer className="h-4 w-4 mr-2" />
-                                            Print
-                                        </Button>
-                                        <Button onClick={handleDownloadId}>
-                                            <FaDownload className="mr-2" />
-                                            Download
-                                        </Button>
-                                    </DialogFooter>
-                                </DialogContent>
-                            </Dialog>
+                            <Button variant="secondary" className="bg-white text-[#DC2626] hover:bg-gray-100" onClick={handleDownloadId}>
+                                <FaDownload className="mr-2" />
+                                Download ID Card
+                            </Button>
                             <Button variant="secondary" className="bg-white text-[#DC2626] hover:bg-gray-100">
                                 <FaCalendarAlt className="mr-2" />
                                 View Academic Calendar

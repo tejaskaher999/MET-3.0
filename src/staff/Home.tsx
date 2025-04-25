@@ -439,7 +439,7 @@ const StaffHome = () => {
               <Phone className="h-4 w-4" />
               <span className="text-sm">Contact</span>
             </div>
-            <p className="font-medium">+91n9876543210</p>
+            <p className="font-medium">+91 9876543210</p>
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-gray-500">
