@@ -1,0 +1,23 @@
+/* Custom breakpoint for medium screens */
+@media (min-width: 945px) and (max-width: 1023px) {
+  .content-wrapper {
+    margin: 0 auto;
+    max-width: 768px; /* Adjust this value as needed */
+  }
+  
+  /* Center the header content */
+  .header-content {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+  
+  /* Ensure the sidebar is hidden by default */
+  .sidebar-hidden {
+    transform: translateX(-100%);
+  }
+}
+
+/* Transition for smooth sidebar toggle */
+.sidebar-transition {
+  transition: transform 0.3s ease-in-out;
+} 

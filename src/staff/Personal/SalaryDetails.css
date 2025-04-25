@@ -1,0 +1,54 @@
+.shadowTop {
+    box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.1), 0 -2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+  
+  .yearSelect :global(.select-trigger) {
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    padding: 0 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a202c;
+    background-color: white;
+    transition: all 0.2s;
+  }
+  
+  .yearSelect :global(.select-trigger:hover) {
+    border-color: #cbd5e0;
+    background-color: #f7fafc;
+  }
+  
+  .yearSelect :global(.select-trigger:focus) {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.1);
+  }
+  
+  .yearSelect :global(.select-content) {
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .yearSelect :global(.select-item) {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #1a202c;
+    transition: all 0.2s;
+  }
+  
+  .yearSelect :global(.select-item:hover) {
+    background-color: #f7fafc;
+  }
+  
+  .yearSelect :global(.select-item[data-selected]) {
+    background-color: #ebf8ff;
+    color: #2b6cb0;
+    font-weight: 600;
+  }
+  
+  .yearSelect :global(.select-item[data-highlighted]) {
+    background-color: #ebf8ff;
+    color: #2b6cb0;
+  }
